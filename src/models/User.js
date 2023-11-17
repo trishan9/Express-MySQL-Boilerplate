@@ -11,6 +11,9 @@ const User = sequelize.define("user", {
     email: {
         type: Sequelize.STRING,
         allowNull: false,
+        validate: {
+            isEmail: true
+        }
     },
     name: {
         type: Sequelize.STRING,
@@ -23,6 +26,9 @@ const User = sequelize.define("user", {
     gender: {
         type: Sequelize.STRING,
         allowNull: false,
+        validate: {
+            isIn: [['male', 'female', 'others']]
+        }
     }
 })
 

@@ -19,19 +19,19 @@ const getUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     const { body, params: { id } } = req
-    const user = await User.findByPk(id)
-    user.name = body.name ? body.name : user.name
-    user.email = body.email ? body.email : user.email
-    user.country = body.country ? body.country : user.country
-    user.gender = body.gender ? body.gender : user.gender
-    user.save()
+    const user = await User.update({
+        ...body
+    }, {
+        where: {
+            id: id
+        }
+    })
     res.json(user)
 }
 
 const deleteUser = async (req, res) => {
     const { params: { id } } = req
-    const user = await User.findByPk(id)
-    user.destroy()
+    const user = await User.destroy({ where: { id: id } })
     res.json(user)
 }
 
